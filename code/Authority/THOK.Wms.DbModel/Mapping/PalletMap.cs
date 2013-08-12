@@ -37,7 +37,7 @@ namespace THOK.Wms.DbModel.Mapping
             this.Property(t => t.CigaretteName)
                 .HasMaxLength(50);
             this.Property(t => t.Quantity)
-                .HasPrecision(16, 4);
+                .HasPrecision(18, 4);
 
             // Table & Column Mappings
             this.Property(t => t.PalletID).HasColumnName(ColumnMap.Value.To("PalletID"));

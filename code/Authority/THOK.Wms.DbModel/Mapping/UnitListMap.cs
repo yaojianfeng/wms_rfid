@@ -30,21 +30,21 @@ namespace THOK.Wms.DbModel.Mapping
                 .HasMaxLength(20);
 
             this.Property(t => t.Quantity01)
-                .HasPrecision(18, 2);
+                .HasPrecision(18,4);
 
             this.Property(t => t.UnitCode02)
                 .IsRequired()
                 .HasMaxLength(20);
 
             this.Property(t => t.Quantity02)
-                .HasPrecision(18, 2);
+                .HasPrecision(18,4);
 
             this.Property(t => t.UnitCode03)
                 .IsRequired()
                 .HasMaxLength(20);
 
             this.Property(t => t.Quantity03)
-                .HasPrecision(18, 2);
+                .HasPrecision(18,4);
 
             this.Property(t => t.UnitCode04)
                 .IsRequired()

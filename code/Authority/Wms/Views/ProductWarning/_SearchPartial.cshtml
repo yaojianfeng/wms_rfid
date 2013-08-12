@@ -13,6 +13,9 @@
     function searchClick() {
         $('#dlg-search').dialog('open').dialog('setTitle', '查询预警信息');
         searchKey = true;
+        $("input[type=text]").attr("value", "");
+        $('#IsActive').combo('setValue', "");
+        searchLoad();
     };
     //选择单位信息
     function unitSelect() {
@@ -48,7 +51,7 @@
                     <table >
                         <tr>
                             <td>产品编码</td>
-                            <td><input name="ProductCode" id="productCode" required="true">
+                            <td><input name="ProductCode" id="productCode" required="true" type="text">
                             <a href="#" onclick="productSelect()" class="easyui-linkbutton" iconcls="icon-search" plain="true"></a></td>
                         </tr>
                         <tr>
@@ -70,15 +73,15 @@
                       </tr>
                         <tr>
                             <td>数量下限</td>
-                            <td><input name="minLimited" id="minLimited" /></td>
+                            <td><input name="minLimited" id="minLimited" type="text"/></td>
                         </tr>
                         <tr>
                             <td>数量上限</td>
-                            <td><input name="maxLimited" id="maxLimited" /></td>
+                            <td><input name="maxLimited" id="maxLimited" type="text"/></td>
                         </tr>
                         <tr>
                             <td>积压时间(天)</td>
-                            <td><input name="assemblyTime" id="assemblyTime" /></td>
+                            <td><input name="assemblyTime" id="assemblyTime" type="text"/></td>
                         </tr>                  
                     </table>
             </div>

@@ -34,7 +34,7 @@ namespace THOK.Wms.DbModel.Mapping
 
             this.Property(t => t.Quantity)
                 .IsRequired()
-                .HasPrecision(18, 2);
+                .HasPrecision(18,4);
 
             this.Property(t => t.SortOrder);
 

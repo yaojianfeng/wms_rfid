@@ -358,6 +358,14 @@
     <Compile Include="Migrations\201306190157258_modify_dailybalance_areacode.Designer.cs">
       <DependentUpon>201306190157258_modify_dailybalance_areacode.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201307030851542_modify_precision.cs" />
+    <Compile Include="Migrations\201307030851542_modify_precision.Designer.cs">
+      <DependentUpon>201307030851542_modify_precision.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201307080246357_Add_xml_value.cs" />
+    <Compile Include="Migrations\201307080246357_Add_xml_value.Designer.cs">
+      <DependentUpon>201307080246357_Add_xml_value.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="AuthorizeContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -399,6 +407,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201306190157258_modify_dailybalance_areacode.resx">
       <DependentUpon>201306190157258_modify_dailybalance_areacode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201307030851542_modify_precision.resx">
+      <DependentUpon>201307030851542_modify_precision.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201307080246357_Add_xml_value.resx">
+      <DependentUpon>201307080246357_Add_xml_value.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

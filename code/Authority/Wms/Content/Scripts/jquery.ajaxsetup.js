@@ -75,18 +75,23 @@ $(function () {
 (function ($){
     $.ajaxSender = 
     {
-        send:function(url,data,callback,panel) {
+        send:function(url,data,successcallback,panel,completecallback) {
             var p ;
             if (!panel)  p = $('#layout-function').layout('panel', 'center');
             else  p=panel;
             wait(p);        
-            $.ajaxSender.complete = callback;
+            $.ajaxSender.success = successcallback;
+            if (completecallback) {
+                $.ajaxSender.complete = completecallback;
+            }
+
             $.ajax({
                 url: url, type: "POST", dataType: "text",
                 data: data,
                 complete: function () {
                     p.children("div.datagrid-mask-msg").remove();
                     p.children("div.datagrid-mask").remove();
+                    $.ajaxSender.complete();
                 },
                 success: function (responseText) {
                     var result = $.evalJSON(responseText);
@@ -94,10 +99,10 @@ $(function () {
                         if (result.msg != '') {
                             $.messager.alert(g_MsgBoxTitle, result.msg, "info",function()
                             {
-                                 $.ajaxSender.complete(result.data);
+                                 $.ajaxSender.success(result.data);
                             });   
                         }else{
-                            $.ajaxSender.complete(result.data);
+                            $.ajaxSender.success(result.data);
                         }                  
                     } else {
                         $.messager.alert(g_MsgBoxTitle, result.msg + '<br />' + result.data, 'error', function () { });
@@ -105,6 +110,7 @@ $(function () {
                 }
             })
          },
+         success: $.noop(),
          complete: $.noop()
     } 
 })(jQuery);

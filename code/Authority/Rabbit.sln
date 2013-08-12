@@ -27,6 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "THOK.WMS.Allot", "THOK.Wms.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{47999AD9-AB42-4E2D-8C04-E10117107561}"
 	ProjectSection(SolutionItems) = preProject
+		..\..\doc\IIS相关配置.doc = ..\..\doc\IIS相关配置.doc
 		..\..\doc\jquery.easyui-1.2.2.chm = ..\..\doc\jquery.easyui-1.2.2.chm
 		..\..\doc\jquery1.7.2_20120420.chm = ..\..\doc\jquery1.7.2_20120420.chm
 		..\..\doc\中烟接口信息表.xls = ..\..\doc\中烟接口信息表.xls

@@ -48,11 +48,11 @@ namespace THOK.Wms.DbModel.Mapping
 
             this.Property(t => t.QuantitySum)
                 .IsRequired()
-                .HasPrecision(18, 2);
+                .HasPrecision(18,4);
 
             this.Property(t => t.AmountSum)
                 .IsRequired()
-                .HasPrecision(18, 2);
+                .HasPrecision(18,4);
 
             this.Property(t => t.DetailNum)
                 .IsRequired();

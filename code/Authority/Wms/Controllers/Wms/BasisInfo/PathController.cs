@@ -89,7 +89,7 @@ namespace Wms.Controllers.Wms.BasisInfo
             public ActionResult Edit(Path path)
             {
                 string strResult = string.Empty;
-                bool bResult = PathService.Save(path);
+                bool bResult = PathService.Save(path,out strResult);
                 string msg = bResult ? "修改成功" : "修改失败";
                 return Json(JsonMessageHelper.getJsonMessage(bResult, msg, strResult), "text", JsonRequestBehavior.AllowGet);
             }

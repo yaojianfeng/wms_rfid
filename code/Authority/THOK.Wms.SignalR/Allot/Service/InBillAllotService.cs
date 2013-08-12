@@ -49,8 +49,7 @@ namespace THOK.Wms.SignalR.Allot.Service
             IQueryable<THOK.Authority.DbModel.SystemParameter> systemParQuery = SystemParameterRepository.GetQueryable();
             IQueryable<InBillMaster> inBillMasterQuery = InBillMasterRepository.GetQueryable();
             IQueryable<Cell> cellQuery = CellRepository.GetObjectSet()
-                .Include("Warehouse").Include("Area").Include("Storages").Include("Storages.Product")
-                .Include("Storages.Product.Unit");
+                .Include("Warehouse").Include("Area").Include("Storages");
 
             InBillMaster billMaster = inBillMasterQuery.Single(b => b.BillNo == billNo);
             if (!CheckAndLock(billMaster, ps)){return;}
@@ -71,7 +70,7 @@ namespace THOK.Wms.SignalR.Allot.Service
                                             && c.IsActive == "1"
                                             && (areaCodes.Any(a => a == c.AreaCode)
                                                 || (!areaCodes.Any() && c.Area.AllotInOrder > 0)))
-                                 .AsParallel();  
+                                 .ToArray();  
 
             //1：主库区；2：件烟区；
             //3；条烟区；4：暂存区；
@@ -100,7 +99,7 @@ namespace THOK.Wms.SignalR.Allot.Service
                                         && c.Storages.Any(s => string.IsNullOrEmpty(s.LockTag)
                                             && s.Product != null
                                             && (s.Quantity > 0 || s.InFrozenQuantity > 0)
-                                            && c.MaxQuantity * s.Product.Unit.Count > s.Quantity - s.InFrozenQuantity));
+                                            && (c.MaxQuantity >= s.Product.CellMaxProductQuantity ? s.Product.CellMaxProductQuantity : c.MaxQuantity * s.Product.Unit.Count) > s.Quantity + s.InFrozenQuantity));
 
             //件烟区 货位是单一存储的空货位； 
             areaTypes = new string[] { "2" };
@@ -131,7 +130,7 @@ namespace THOK.Wms.SignalR.Allot.Service
             var cellQueryFromList3 = cell3.OrderBy(c => c.Area.AllotInOrder);
             if (InMantissaIsPiece.ParameterValue != "0")
             {
-                cellQueryFromList3 = cell3.Where(c => c.Storages.Any(s => c.MaxQuantity * s.Product.Unit.Count > s.Quantity - s.InFrozenQuantity))
+                cellQueryFromList3 = cell3.Where(c => c.Storages.Any(s => (c.MaxQuantity >= s.Product.CellMaxProductQuantity ? s.Product.CellMaxProductQuantity : c.MaxQuantity) * s.Product.Unit.Count > s.Quantity + s.InFrozenQuantity))
                                               .OrderBy(c => c.Area.AllotInOrder);
             }
             //件烟区 --入库尾数不放入件烟区
@@ -226,7 +225,7 @@ namespace THOK.Wms.SignalR.Allot.Service
                     {
                         lock (c)
                         {
-                            decimal allotQuantity = c.MaxQuantity * billDetail.Product.Unit.Count;
+                            decimal allotQuantity = (c.MaxQuantity >= billDetail.Product.CellMaxProductQuantity ? billDetail.Product.CellMaxProductQuantity : c.MaxQuantity) * billDetail.Product.Unit.Count;
                             decimal billQuantity = billDetail.BillQuantity - billDetail.AllotQuantity;
                             allotQuantity = allotQuantity < billQuantity ? allotQuantity : billQuantity;
                             var targetStorage = Locker.LockStorage(c);
@@ -345,7 +344,7 @@ namespace THOK.Wms.SignalR.Allot.Service
                                 || (targetStorage.Quantity == 0
                                     && targetStorage.InFrozenQuantity == 0)))
                         {
-                            decimal allotQuantity = c.MaxQuantity * billDetail.Product.Unit.Count 
+                            decimal allotQuantity = (c.MaxQuantity >= billDetail.Product.CellMaxProductQuantity ? billDetail.Product.CellMaxProductQuantity : c.MaxQuantity) * billDetail.Product.Unit.Count 
                                                         - targetStorage.Quantity 
                                                         - targetStorage.InFrozenQuantity;
                             decimal billQuantity = Math.Floor((billDetail.BillQuantity - billDetail.AllotQuantity)
@@ -377,7 +376,7 @@ namespace THOK.Wms.SignalR.Allot.Service
                                 || (targetStorage.Quantity == 0
                                     && targetStorage.InFrozenQuantity == 0)))
                         {
-                            decimal allotQuantity = c.MaxQuantity * billDetail.Product.Unit.Count
+                            decimal allotQuantity = (c.MaxQuantity >= billDetail.Product.CellMaxProductQuantity ? billDetail.Product.CellMaxProductQuantity : c.MaxQuantity) * billDetail.Product.Unit.Count
                                                         - targetStorage.Quantity
                                                         - targetStorage.InFrozenQuantity; 
                             decimal billQuantity = billDetail.BillQuantity - billDetail.AllotQuantity;
@@ -430,7 +429,7 @@ namespace THOK.Wms.SignalR.Allot.Service
                 {
                     if (!cancellationToken.IsCancellationRequested && (billDetail.BillQuantity - billDetail.AllotQuantity) > 0)
                     {
-                        decimal allotQuantity = c.MaxQuantity * billDetail.Product.Unit.Count;
+                        decimal allotQuantity = (c.MaxQuantity >= billDetail.Product.CellMaxProductQuantity ? billDetail.Product.CellMaxProductQuantity : c.MaxQuantity) * billDetail.Product.Unit.Count;
                         decimal billQuantity = Math.Floor((billDetail.BillQuantity - billDetail.AllotQuantity)
                             / billDetail.Product.Unit.Count)
                             * billDetail.Product.Unit.Count;

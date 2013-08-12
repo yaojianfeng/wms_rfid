@@ -19,7 +19,7 @@
                         },
                         function (data) {
                             $.fn.zTree.init($("#treeDemo"), setting, data);
-                        }, $('#dlg'));    
+                        }, $('#dlg'));
     }
     function productSearchClick() {
         $('#productData').dialog('open').dialog('setTitle', '选择卷烟信息');
@@ -28,6 +28,8 @@
     }
 
     function enterSave() {
+        $('#dlg').dialog('close');
+        $('#details').datagrid('reload');
         var ware = "", area = "", shelf = "", cell = "";
         var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
         var wareNodes = treeObj.getNodesByParam("type", "ware", null);

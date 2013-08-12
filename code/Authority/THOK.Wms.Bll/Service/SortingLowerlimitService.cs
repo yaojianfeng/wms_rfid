@@ -208,6 +208,7 @@ namespace THOK.Wms.Bll.Service
             else
             {
                 productSave.IsRounding = sortLowerLimit.SortType;
+                lowerLimitSave.SortType = "";
             }
             lowerLimitSave.IsActive = sortLowerLimit.IsActive;
             lowerLimitSave.UpdateTime = DateTime.Now;

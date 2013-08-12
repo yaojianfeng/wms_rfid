@@ -24,7 +24,7 @@ namespace THOK.Wms.DbModel.Mapping
                 .HasMaxLength(13);
             this.Property(t => t.Quantity)
                 .IsRequired()
-                .HasPrecision(16, 4);
+                .HasPrecision(18, 4);
             this.Property(t => t.Price)
                 .HasPrecision(16, 2);
             this.Property(t => t.Amount)

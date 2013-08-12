@@ -17,6 +17,7 @@
     function searchClick() {
         $('#dlgSearch').dialog('open').dialog('setTitle', '查询');
         searchKey = true;
+        $("input[type=text]").attr("value", "");
         searchLoad();
     }
     //点击查询结果
@@ -49,7 +50,7 @@
                         <option value="ProductCode">卷烟编码</option>
                         <option value="ProductName">卷烟名称</option>
                     </select>
-                    <input id="cellInfo">
+                    <input id="cellInfo" type="text">
                 </div>
             </table>
         </div>

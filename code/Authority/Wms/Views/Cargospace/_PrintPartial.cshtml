@@ -1,19 +1,24 @@
 ﻿<script type="text/javascript">
     function printClick() {
+        alert(1);
         var row = $('#warehouseTree').tree("getSelected");
-        if (row) {
+        var treeObj = $.fn.zTree.getZTreeObj("warehouseTree");
+        var row1 = treeObj.getSelectedNodes();
+        if (row1 == null) {
+            $.messager.alert("系统提示", "未选中树形菜单", "info");
+        }
+        else {
+            alert(row1[0].type);
+            alert(row1[0].id);
             var rowAttribute = null
               , rowId = null;
 
-            if (row.attributes == null) { rowAttribute = ""; } else { rowAttribute = row.attributes; }
-            if (row.id == null) { rowId = ""; } else { rowId = row.id; }
+            if (row1[0].type == null) { rowAttribute = ""; } else { rowAttribute = row1[0].type; }
+            if (row1[0].id == null) { rowId = ""; } else { rowId = row1[0].id; }
 
             window.location.href = "/Cargospace/CreateExcelToClient/"
                                     + "?type=" + rowAttribute
                                     + "&id=" + rowId;
-        }
-        else {
-            $.messager.alert("系统提示","未选中树形菜单","info");
         }
     }
 </script>

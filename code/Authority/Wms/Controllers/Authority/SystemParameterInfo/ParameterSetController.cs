@@ -36,12 +36,8 @@ namespace Wms.Controllers.Authority.SystemParameterInfo
             string parameterValue = collection["ParameterValue"] ?? "";
             string remark = collection["Remark"] ?? "";
             string userName = collection["UserName"] ?? "";
-            SystemParameter sp = new SystemParameter();
-            sp.ParameterName = parameterName;
-            sp.ParameterValue = parameterValue;
-            sp.Remark = remark;
-            sp.UserName = userName;
-            var result = SystemParameterService.GetSystemParameter(page, rows, sp);
+            string SystemID = collection["SystemID"] ?? "";
+            var result = SystemParameterService.GetSystemParameter(page, rows, parameterName, parameterValue, remark, userName, SystemID);
             return Json(result, "text", JsonRequestBehavior.AllowGet);
         }
         // GET: /ParameterSet/AddSystemParameter/

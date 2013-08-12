@@ -14,6 +14,9 @@ namespace THOK.Wms.Bll.Service
         [Dependency]
         public IBrandRepository BrandRepository { get; set; }
 
+        [Dependency]
+        public ISupplierRepository SupplierRepository { get; set; }
+
 
         protected override Type LogPrefix
         {
@@ -53,12 +56,24 @@ namespace THOK.Wms.Bll.Service
 
         public bool Delete(string BrandCode)
         {
-            var brand = BrandRepository.GetQueryable()
-                .FirstOrDefault(b => b.BrandCode == BrandCode);
-            if (BrandCode != null)
+            var brand = BrandRepository.GetQueryable().FirstOrDefault(b => b.BrandCode == BrandCode);
+
+            //var supplier = SupplierRepository.GetQueryable().FirstOrDefault(s => s.SupplierCode == BrandCode);
+
+            if (brand != null)
             {
-                BrandRepository.Delete(brand);
-                BrandRepository.SaveChanges();
+            //    try
+            //    {
+            //        if (supplier != null)
+            //        {
+            //            SupplierRepository.Delete(supplier);
+            //            SupplierRepository.SaveChanges();
+            //        }
+                    BrandRepository.Delete(brand);
+                    BrandRepository.SaveChanges();
+            //    }
+            //    catch (Exception e)
+            //    { }
             }
             else
                 return false;

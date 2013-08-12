@@ -593,6 +593,19 @@ namespace THOK.Wms.Bll.Service
                 var storageQuery = StorageRepository.GetQueryable();
 
                 DateTime dt1 = Convert.ToDateTime(settleDate);
+                var maxDailyBalance = dailyBalanceQuery.Where(d => d.SettleDate < dt1)
+                                           .OrderByDescending(d => d.SettleDate)
+                                           .FirstOrDefault();
+                if (maxDailyBalance != null)
+                {
+                    if (maxDailyBalance.SettleDate < DateTime.Now 
+                        && maxDailyBalance.SettleDate.ToString("yyyy-MM-dd") != DateTime.Now.ToString("yyyy-MM-dd"))
+                    {
+                        dt1 = maxDailyBalance.SettleDate.AddDays(1);
+                        settleDate = dt1.ToString("yyyy-MM-dd");
+                    }
+                }
+
                 DateTime dt2 = dt1.AddDays(1);
                 if (DateTime.Now < dt1)
                 {
@@ -606,12 +619,21 @@ namespace THOK.Wms.Bll.Service
                 if (dailyBalance != null) dt3 = dailyBalance.SettleDate;
 
                 var oldDailyBalance = dailyBalanceQuery.Where(d => (d.WarehouseCode == warehouseCode || string.IsNullOrEmpty(warehouseCode))
-                                                                 && d.SettleDate == dt1).ToArray();
+                                                                 && d.SettleDate >= dt1).ToArray();
                 DailyBalanceRepository.Delete(oldDailyBalance);
                 DailyBalanceRepository.SaveChanges();
 
+                //if (inQuery.Where(i => i.InBillMaster.BillDate >= dt1 && i.InBillMaster.BillDate < dt2 && i.InBillMaster.Status != "6").Any()
+                //    || outQuery.Where(i => i.OutBillMaster.BillDate >= dt1 && i.OutBillMaster.BillDate < dt2 && i.OutBillMaster.Status != "6").Any()
+                //    || moveQuery.Where(i => i.MoveBillMaster.BillDate >= dt1 && i.MoveBillMaster.BillDate < dt2 && i.MoveBillMaster.Status != "4").Any()
+                //    || profitLossQuery.Where(i => i.ProfitLossBillMaster.BillDate >= dt1 && i.ProfitLossBillMaster.BillDate < dt2 && i.ProfitLossBillMaster.Status != "2").Any())
+                //{
+                //    errorInfo = "选择日结日期还有订单未结单，不可以进行日结！";
+                //    return false;
+                //}
+
                 var query = inQuery.Where(a => (a.InBillMaster.WarehouseCode == warehouseCode || string.IsNullOrEmpty(warehouseCode))
-                                              && a.InBillMaster.BillDate > dt1 && a.InBillMaster.BillDate < dt2
+                                              && a.FinishTime >= dt1 && a.FinishTime < dt2
                                               && dt3 != null)
                     .Select(a => new
                     {
@@ -629,7 +651,7 @@ namespace THOK.Wms.Bll.Service
                     })
                 .Concat(
                     outQuery.Where(a => (a.OutBillMaster.WarehouseCode == warehouseCode || string.IsNullOrEmpty(warehouseCode))
-                                            && a.OutBillMaster.BillDate > dt1 && a.OutBillMaster.BillDate < dt2
+                                            && a.FinishTime >= dt1 && a.FinishTime < dt2
                                             && dt3 != null)
                     .Select(a => new
                     {
@@ -647,7 +669,7 @@ namespace THOK.Wms.Bll.Service
                     })
                 ).Concat(
                     moveQuery.Where(a => (a.MoveBillMaster.WarehouseCode == warehouseCode || string.IsNullOrEmpty(warehouseCode))
-                                            && a.MoveBillMaster.BillDate > dt1 && a.MoveBillMaster.BillDate < dt2
+                                            && a.FinishTime >= dt1 && a.FinishTime < dt2
                                             && a.Status == "2"
                                             && dt3 != null)
                     .Select(a => new
@@ -667,7 +689,7 @@ namespace THOK.Wms.Bll.Service
                 )
                 .Concat(
                     moveQuery.Where(a => (a.MoveBillMaster.WarehouseCode == warehouseCode || string.IsNullOrEmpty(warehouseCode))
-                                            && a.MoveBillMaster.BillDate > dt1 && a.MoveBillMaster.BillDate < dt2
+                                            && a.FinishTime >= dt1 && a.FinishTime < dt2
                                             && a.Status == "2"
                                             && dt3 != null)
                     .Select(a => new
@@ -686,7 +708,7 @@ namespace THOK.Wms.Bll.Service
                     })
                 ).Concat(
                     profitLossQuery.Where(a => (a.ProfitLossBillMaster.WarehouseCode == warehouseCode || string.IsNullOrEmpty(warehouseCode))
-                                                    && a.ProfitLossBillMaster.BillDate > dt1 && a.ProfitLossBillMaster.BillDate < dt2
+                                                    && a.ProfitLossBillMaster.VerifyDate >= dt1 && a.ProfitLossBillMaster.VerifyDate < dt2
                                                     && dt3 != null)
                     .Select(a => new
                     {

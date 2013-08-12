@@ -133,6 +133,7 @@
     <Compile Include="EntityRepository\UnitListRepository.cs" />
     <Compile Include="EntityRepository\UnitRepository.cs" />
     <Compile Include="EntityRepository\WarehouseRepository.cs" />
+    <Compile Include="EntityRepository\XmlValueRepository.cs" />
     <Compile Include="Interfaces\IAlarmInfoRepository.cs" />
     <Compile Include="Interfaces\IAreaRepository.cs" />
     <Compile Include="Interfaces\IBillDetailRepository.cs" />
@@ -214,6 +215,7 @@
     <Compile Include="Interfaces\IUnitListRepository.cs" />
     <Compile Include="Interfaces\IUnitRepository.cs" />
     <Compile Include="Interfaces\IWarehouseRepository.cs" />
+    <Compile Include="Interfaces\IXmlValueRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

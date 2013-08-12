@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="THOK.LedDisplay">
+</Property><Property Name="解决方案文件" Value="E:\thok\【梧州仓储项目】\THOK.LedDisplay\THOK.LedDisplay.sln">
+</Property><Property Name="用户选项文件" Value="E:\thok\【梧州仓储项目】\THOK.LedDisplay\THOK.LedDisplay.suo">
+</Property><Property Name="Date" Value="2013年7月22日">
+</Property><Property Name="Time" Value="12:30">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="THOK.LedDisplay.sln" Description="文件已成功备份为 E:\thok\【梧州仓储项目】\THOK.LedDisplay\Backup\THOK.LedDisplay.sln">
+</Event><Event ErrorLevel="0" Project="" Source="THOK.LedDisplay.suo" Description="文件已成功备份为 E:\thok\【梧州仓储项目】\THOK.LedDisplay\Backup\THOK.LedDisplay.suo">
+</Event><Event ErrorLevel="0" Project="THOK.LedDisplay" Source="THOK.LedDisplay\THOK.LedDisplay.csproj" Description="项目文件已成功备份为 E:\thok\【梧州仓储项目】\THOK.LedDisplay\Backup\THOK.LedDisplay\THOK.LedDisplay.csproj">
+</Event><Event ErrorLevel="0" Project="THOK.LedDisplay" Source="THOK.LedDisplay\THOK.LedDisplay.csproj.user" Description="项目用户文件成功备份为 E:\thok\【梧州仓储项目】\THOK.LedDisplay\Backup\THOK.LedDisplay\THOK.LedDisplay.csproj.user">
+</Event><Event ErrorLevel="0" Project="THOK.LedDisplay" Source="THOK.LedDisplay\Dal\BillDal.cs" Description="文件已成功备份为 E:\thok\【梧州仓储项目】\THOK.LedDisplay\Backup\THOK.LedDisplay\Dal\BillDal.cs">
+</Event><Event ErrorLevel="0" Project="THOK.LedDisplay" Source="THOK.LedDisplay\Dao\BillDao.cs" Description="文件已成功备份为 E:\thok\【梧州仓储项目】\THOK.LedDisplay\Backup\THOK.LedDisplay\Dao\BillDao.cs">
+</Event><Event ErrorLevel="0" Project="THOK.LedDisplay" Source="THOK.LedDisplay\LedDisplay.cs" Description="文件已成功备份为 E:\thok\【梧州仓储项目】\THOK.LedDisplay\Backup\THOK.LedDisplay\LedDisplay.cs">
+</Event><Event ErrorLevel="0" Project="THOK.LedDisplay" Source="THOK.LedDisplay\LedDisplay.Designer.cs" Description="文件已成功备份为 E:\thok\【梧州仓储项目】\THOK.LedDisplay\Backup\THOK.LedDisplay\LedDisplay.Designer.cs">
+</Event><Event ErrorLevel="0" Project="THOK.LedDisplay" Source="THOK.LedDisplay\Program.cs" Description="文件已成功备份为 E:\thok\【梧州仓储项目】\THOK.LedDisplay\Backup\THOK.LedDisplay\Program.cs">
+</Event><Event ErrorLevel="0" Project="THOK.LedDisplay" Source="THOK.LedDisplay\Properties\AssemblyInfo.cs" Description="文件已成功备份为 E:\thok\【梧州仓储项目】\THOK.LedDisplay\Backup\THOK.LedDisplay\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="THOK.LedDisplay" Source="THOK.LedDisplay\Properties\Resources.Designer.cs" Description="文件已成功备份为 E:\thok\【梧州仓储项目】\THOK.LedDisplay\Backup\THOK.LedDisplay\Properties\Resources.Designer.cs">
+</Event><Event ErrorLevel="0" Project="THOK.LedDisplay" Source="THOK.LedDisplay\Properties\Settings.Designer.cs" Description="文件已成功备份为 E:\thok\【梧州仓储项目】\THOK.LedDisplay\Backup\THOK.LedDisplay\Properties\Settings.Designer.cs">
+</Event><Event ErrorLevel="0" Project="THOK.LedDisplay" Source="THOK.LedDisplay\Properties\Settings.settings" Description="文件已成功备份为 E:\thok\【梧州仓储项目】\THOK.LedDisplay\Backup\THOK.LedDisplay\Properties\Settings.settings">
+</Event><Event ErrorLevel="0" Project="THOK.LedDisplay" Source="THOK.LedDisplay\App.ico" Description="文件已成功备份为 E:\thok\【梧州仓储项目】\THOK.LedDisplay\Backup\THOK.LedDisplay\App.ico">
+</Event><Event ErrorLevel="0" Project="THOK.LedDisplay" Source="THOK.LedDisplay\LedDisplay.resx" Description="文件已成功备份为 E:\thok\【梧州仓储项目】\THOK.LedDisplay\Backup\THOK.LedDisplay\LedDisplay.resx">
+</Event><Event ErrorLevel="0" Project="THOK.LedDisplay" Source="THOK.LedDisplay\Properties\Resources.resx" Description="文件已成功备份为 E:\thok\【梧州仓储项目】\THOK.LedDisplay\Backup\THOK.LedDisplay\Properties\Resources.resx">
+</Event><Event ErrorLevel="1" Project="THOK.LedDisplay" Source="THOK.LedDisplay\THOK.LedDisplay.csproj" Description="您的项目以 .NET Framework 2.0 或 3.0 为目标。如果您的项目使用的程序集需要更新的 .NET Framework，则项目生成将失败。通过单击项目菜单上的“属性”，然后在“.NET Framework”下拉框中选择一个新版本，可以更改 .NET Framework 的版本。(在 Visual Basic 中，可在单击“高级编辑器选项...”按钮时显示的“编译”选项卡上找到此下拉框。)">
+</Event><Event ErrorLevel="0" Project="THOK.LedDisplay" Source="THOK.LedDisplay\THOK.LedDisplay.csproj" Description="项目已成功转换">
+</Event><Event ErrorLevel="3" Project="THOK.LedDisplay" Source="THOK.LedDisplay\THOK.LedDisplay.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="THOK.LedDisplay.sln" Description="成功转换解决方案">
+</Event><Event ErrorLevel="3" Project="" Source="THOK.LedDisplay.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="THOK.LedDisplay" Source="THOK.LedDisplay\THOK.LedDisplay.csproj" Description="扫描完成: 项目文件不需要升级。">
+</Event></UpgradeLog>

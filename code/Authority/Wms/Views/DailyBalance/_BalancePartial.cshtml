@@ -29,7 +29,12 @@
                 function (data) {
                     $('#details').datagrid('reload');
                     $('#dlg-Daily').dialog('close');
-                }, $('#dlg-Daily'));
+                },
+                $('#dlg-Daily'),
+                function () {
+                    $('#details').datagrid('reload');
+                    $('#dlg-Daily').dialog('close');
+                });
     };
 </script>
 

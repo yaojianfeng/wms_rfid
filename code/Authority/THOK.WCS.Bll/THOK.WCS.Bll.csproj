@@ -44,12 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\ITaskService.cs" />
+    <Compile Include="Models\RestReturn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\TaskService.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\THOK.Common.Ef\THOK.Common.Ef.csproj">
       <Project>{59FB8EB5-F5B8-4423-8550-A7819C855CDE}</Project>

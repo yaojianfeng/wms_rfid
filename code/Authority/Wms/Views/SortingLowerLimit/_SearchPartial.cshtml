@@ -17,6 +17,8 @@
         $('#dlg-search').dialog('open').dialog('setTitle', '查询');
         searchKey = true;
         $("input[type=text]").attr("value", "");
+        $('#status').combo('setValue', "");
+        searchLoad();
     };
 
     function select() {

@@ -80,7 +80,8 @@ namespace Authority.Controllers.Wms.ProductInfo
 
         public ActionResult Edit(UnitList unitList)
         {
-            bool bResult = UnitListService.Save(unitList);
+            string strResult = string.Empty;
+            bool bResult = UnitListService.Save(unitList,out strResult);
             string msg = bResult ? "修改成功" : "修改失败";
             return Json(JsonMessageHelper.getJsonMessage(bResult, msg, null), "text", JsonRequestBehavior.AllowGet);
         }

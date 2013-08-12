@@ -35,7 +35,10 @@ namespace THOK.Wms.Bll.Service
          public object GetDetail(int page, int rows, string productCode, decimal minLimited, decimal maxLimited, decimal assemblyTime)
          {
              IQueryable<ProductWarning> productWarningQuery = ProductWarningRepository.GetQueryable();
-             var productWarning = productWarningQuery.Where(p => p.ProductCode.Contains(productCode)).OrderBy(p => p.ProductCode).Select(p => p).ToArray();
+             var productWarning = productWarningQuery
+                 .Where(p => p.ProductCode.Contains(productCode))
+                 .OrderBy(p => p.ProductCode)
+                 .Select(p => p).ToArray();
              if (productCode != "")
              {
                  productWarning = productWarning.Where(p => p.ProductCode == productCode).ToArray();

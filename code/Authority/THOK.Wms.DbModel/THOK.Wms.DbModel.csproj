@@ -148,6 +148,7 @@
     <Compile Include="Mapping\UnitMap.cs" />
     <Compile Include="Mapping\WarehouseMap.cs" />
     <Compile Include="Mapping\BusinessSystemsDailyBalanceMap.cs" />
+    <Compile Include="Mapping\XmlValueMap.cs" />
     <Compile Include="MoveBillDetail.cs" />
     <Compile Include="MoveBillDetailHistory.cs" />
     <Compile Include="MoveBillMaster.cs" />
@@ -189,6 +190,7 @@
     <Compile Include="UnitList.cs" />
     <Compile Include="Warehouse.cs" />
     <Compile Include="BusinessSystemsDailyBalance.cs" />
+    <Compile Include="XmlValue.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

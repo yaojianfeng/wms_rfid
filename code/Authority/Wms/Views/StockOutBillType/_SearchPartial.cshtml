@@ -14,6 +14,9 @@
     function searchClick() {
         $('#dlg-search').dialog('open').dialog('setTitle', '查询');
         searchKey = true;
+        $("input[type=text]").attr("value", "");
+        $('#IsActive').combo('setValue', "");
+        searchLoad();
     };
 
     function select() {
@@ -38,11 +41,11 @@
             <table width="250">
               <tr>
                 <td width="80">订单类型编码</td>
-                <td width="168" align="left"><input id="BillTypeCode"></td> 
+                <td width="168" align="left"><input id="BillTypeCode" type="text"></td> 
               </tr>
               <tr>
                 <td width="80">订单类型名称</td>
-                <td width="168" align="left"><input id="BillTypeName"></td>
+                <td width="168" align="left"><input id="BillTypeName" type="text"></td>
               </tr>
               <tr>
                 <td>是否可用:</td>

@@ -45,6 +45,8 @@ namespace THOK.WES.View
             pnlChart.Visible = false;
             pnlChart.Dock = DockStyle.Fill;
 
+            btnChart.Enabled = false;
+
             pnlChart.MouseWheel += new MouseEventHandler(pnlChart_MouseWheel);
         }
        
@@ -90,7 +92,7 @@ namespace THOK.WES.View
                             cellTable.Columns.Add("ProductCode");
                             cellTable.Columns.Add("ProductName");
                             cellTable.Columns.Add("QuantityTiao", typeof(decimal));
-                            cellTable.Columns.Add("QuantityJian",typeof(decimal));
+                            cellTable.Columns.Add("QuantityJian", typeof(decimal));
                             cellTable.Columns.Add("WareCode");
                             cellTable.Columns.Add("WareName");
                             cellTable.Columns.Add("IsActive");
@@ -117,6 +119,12 @@ namespace THOK.WES.View
                                 dr["Shelf"] = shelf.Shelf;
                                 cellTable.Rows.Add(dr);
                             }
+                            if (cellTable.Rows.Count > 0)
+                            {
+                                btnChart.Enabled = true;
+                                pnlProgress.Visible = false;
+                                btnRefresh.Enabled = true;
+                            }
                             bsMain.DataSource = cellTable;
                         }
                         else
@@ -129,9 +137,6 @@ namespace THOK.WES.View
                 {
                     MessageBox.Show("读取数据失败，原因：" + ex.Message, "消息", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                pnlProgress.Visible = false;
-                btnRefresh.Enabled = true;
-                btnChart.Enabled = true;
             }
             catch (Exception exp)
             {
@@ -151,15 +156,12 @@ namespace THOK.WES.View
                     pnlData.Visible = false;
                     pnlChart.Visible = true;
                     btnChart.Text = "列表";
-                    progressBar1.Visible = true;
                     button1.Visible = true;
                     button2.Visible = true;
                     button3.Visible = false;
                     button4.Visible = true;
                     button5.Visible = true;
                    
-                    this.label2.Visible = true;
-                    this.label3.Visible = true;
                 }
                 else
                 {
@@ -168,10 +170,6 @@ namespace THOK.WES.View
                     pnlData.Visible = true;
                     pnlChart.Visible = false;
                     btnChart.Text = "图形";
-                    progressBar1.Visible = false;
-                    label1.Visible = false;
-                    label2.Visible = false;
-                    this.label3.Visible = false;
                     button1.Visible = false;
                     button2.Visible = false;
                     button3.Visible = false;
@@ -191,21 +189,6 @@ namespace THOK.WES.View
                 size = e.Graphics.MeasureString("13", font);
                 float adjustWidth = (cellWidth - size.Width) / 2;
 
-                int qu = 30000;
-
-                if (qu >= 34680)
-                {
-                    this.label1.Visible = true;
-                    this.label3.Visible = false;
-                }
-                else
-                {
-                    this.label1.Visible = false;
-                    this.label3.Visible = false;
-                    this.progressBar1.Value = qu;
-                }
-
-                label2.Text = "库存：" + qu + "件";
                 for (int i = 0; i <= 7; i++)
                 {
                     string keys = "";

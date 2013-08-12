@@ -14,7 +14,7 @@ namespace THOK.Wms.Bll.Interfaces
 
         bool Delete(string unitListCode);
 
-        bool Save(UnitList unitList);
+        bool Save(UnitList unitList, out string strResult);
 
         System.Data.DataTable GetUnitList(int page, int rows, UnitList uls);
     }

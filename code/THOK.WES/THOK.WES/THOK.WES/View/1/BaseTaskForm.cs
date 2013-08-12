@@ -106,6 +106,8 @@ namespace THOK.WES.View
             pnlChart.Dock = DockStyle.Fill;
             pnlChart.MouseWheel += new MouseEventHandler(pnlChart_MouseWheel);
 
+            btnChart.Enabled = false;
+
             gridUtil = new GridUtil(dgvMain);
             url = configUtil.GetConfig("URL")["URL"];
             OperateAreas = configUtil.GetConfig("Layers")["Number"];
@@ -286,6 +288,10 @@ namespace THOK.WES.View
                             dr["Shelf"] = shelf.Shelf;
                             cellTable.Rows.Add(dr);
                         }
+                        if (cellTable.Rows.Count > 0)
+                        {
+                            btnChart.Enabled = true;
+                        }
                     }
                 });
             });
@@ -311,19 +317,11 @@ namespace THOK.WES.View
                 {
                     if (BillTypes == "1")
                     {
-                        DateTime now = DateTime.Now;
                         while (listRfid.Count == 0 || listRfid == null)
                         {
                             DisplayPlWailt();
                             listRfid = rRfid.ReadTrayRfid(port, 115200, out errString);
                             Application.DoEvents();
-                            DateTime newTiem =DateTime.Now;
-                            if (((TimeSpan)(DateTime.Now - now)).TotalSeconds < 10000 && (listRfid.Count==0 ||listRfid==null))
-                            {
-                                MessageBox.Show("申请失败，读取不到RFID数据！" );
-                                RefreshData();
-                                return;
-                            }
                         }
                         RfidCode = RfidCode = listRfid[0].ToString();
                         Task task = new Task(url);
@@ -752,13 +750,6 @@ namespace THOK.WES.View
                             DisplayPlWailt();
                             listRfid = rRfid.ReadTrayRfid(port, 115200, out errString);
                             Application.DoEvents();
-                            DateTime now = DateTime.Now;
-                            if (((TimeSpan)(DateTime.Now - now)).TotalSeconds < 10000 && (listRfid.Count == 0 || listRfid == null))
-                            {
-                                MessageBox.Show("申请失败，读取不到RFID数据！");
-                                RefreshData();
-                                return;
-                            }
                         }
                     }
                 }
@@ -960,53 +951,6 @@ namespace THOK.WES.View
                 }
             }
         }
-
-        private void btnChart_Click(object sender, EventArgs e)
-        {
-            if (cellTable != null && cellTable.Rows.Count != 0)
-            {
-                if (pnlData.Visible)
-                {
-                    filtered = true;
-                    needDraw = true;
-                    pnlData.Visible = false;
-                    btnSearch.Enabled = false;
-                    pnlChart.Visible = true;
-                    btnChart.Text = "列表";
-                    btnApply.Visible = false;
-                    btnCancel.Visible = false;
-                    btnConfirm.Visible = false;
-                    btnBatConfirm.Visible = false;
-                    btnOpType.Visible = false;
-                    btnBcCompose.Visible = false;
-                    button1.Visible = true;
-                    button2.Visible = true;
-                    button3.Visible = true;
-                    button4.Visible = true;
-                }
-
-                else
-                {
-                    needDraw = false;
-                    pnlData.Visible = true;
-                    btnSearch.Enabled = true;
-                    pnlChart.Visible = false;
-                    btnChart.Text = "图示";
-                    btnApply.Visible = true;
-                    btnCancel.Visible = true;
-                    btnConfirm.Visible = true;
-                    btnBatConfirm.Visible = true;
-                    btnOpType.Visible = true;
-                    btnBcCompose.Visible = true;
-                    button1.Visible = false;
-                    button2.Visible = false;
-                    button3.Visible = false;
-                    button4.Visible = false;
-
-                }
-            }
-        }
-
         private void sbShelf_ValueChanged(object sender, EventArgs e)
         {
             int pos = sbShelf.Value / 30 + 1;
@@ -1194,6 +1138,52 @@ namespace THOK.WES.View
             {
                 top[i] = pnlContent.Height / top.Length * i;
             }
+        }
+
+        private void btnChart_Click(object sender, EventArgs e)
+        {
+             if (cellTable != null && cellTable.Rows.Count != 0)
+             {
+                 if (pnlData.Visible)
+                 {
+                     filtered = true;
+                     needDraw = true;
+                     pnlData.Visible = false;
+                     btnSearch.Enabled = false;
+                     pnlChart.Visible = true;
+                     btnChart.Text = "列表";
+                     btnApply.Visible = false;
+                     btnCancel.Visible = false;
+                     btnConfirm.Visible = false;
+                     btnBatConfirm.Visible = false;
+                     btnOpType.Visible = false;
+                     btnBcCompose.Visible = false;
+                     button1.Visible = true;
+                     button2.Visible = true;
+                     button3.Visible = true;
+                     button4.Visible = true;
+                 }
+
+                 else
+                 {
+                     needDraw = false;
+                     pnlData.Visible = true;
+                     btnSearch.Enabled = true;
+                     pnlChart.Visible = false;
+                     btnChart.Text = "图示";
+                     btnApply.Visible = true;
+                     btnCancel.Visible = true;
+                     btnConfirm.Visible = true;
+                     btnBatConfirm.Visible = true;
+                     btnOpType.Visible = true;
+                     btnBcCompose.Visible = true;
+                     button1.Visible = false;
+                     button2.Visible = false;
+                     button3.Visible = false;
+                     button4.Visible = false;
+
+                 }
+             }
         }
     }
 }

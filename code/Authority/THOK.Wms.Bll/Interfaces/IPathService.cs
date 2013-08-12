@@ -12,12 +12,14 @@ namespace THOK.Wms.Bll.Interfaces
 
         bool Add(Path path);
 
-        bool Save(Path path);
+        bool Save(Path path, out string strResult);
 
         bool Delete(int pathId);
 
         object GetPath(int page, int rows, string queryString, string value);
 
         System.Data.DataTable GetPath(int page, int rows, Path path);
+
+        //bool Save(Path path, string strResult);
     }
 }

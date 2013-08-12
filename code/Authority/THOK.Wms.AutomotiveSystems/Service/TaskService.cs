@@ -325,8 +325,8 @@ namespace THOK.Wms.AutomotiveSystems.Service
                 THOK.Wms.AutomotiveSystems.Models.BillDetail[] billDetails1 = new THOK.Wms.AutomotiveSystems.Models.BillDetail[] { };
                 THOK.Wms.AutomotiveSystems.Models.BillDetail[] billDetails2 = new THOK.Wms.AutomotiveSystems.Models.BillDetail[] { };
 
-                //查询等于30件的数据
-                billDetails1 = billDetails.Where(s => s.Total == 30).OrderByDescending(i => i.Status)
+                //查询大于等于30件的数据
+                billDetails1 = billDetails.Where(s => s.Total >= 30).OrderByDescending(i => i.Status)
                                                 .ThenBy(b => b.StorageName).ThenBy(f => f.ProductCode).ToArray();
                 //查询小于30件的数据
                 billDetails2 = billDetails.Where(s => s.Total < 30).OrderByDescending(i => i.Status)
@@ -819,8 +819,9 @@ namespace THOK.Wms.AutomotiveSystems.Service
             {
                 var cellInfo = CellRepository.GetQueryable().Join(StorageRepository.GetQueryable(),
                                 c => c.CellCode, s => s.CellCode, (c, s) => new { cellInfos = c, storage = s })
-                               .Where(c => (c.cellInfos.CellType == "1" || c.cellInfos.CellType == "2") && c.cellInfos.IsActive=="1").AsEnumerable()
-                               .Select(c => new THOK.Wms.AutomotiveSystems.Models.ShelfInfo()
+                               .Where(c=> c.cellInfos.IsActive == "1")
+                               .AsEnumerable()
+                               .Select(c    => new THOK.Wms.AutomotiveSystems.Models.ShelfInfo()
                                 {
                                     ShelfCode=c.cellInfos.Shelf.ShelfCode,
                                     ShelfName = c.cellInfos.Shelf.ShelfName,
@@ -835,9 +836,8 @@ namespace THOK.Wms.AutomotiveSystems.Service
                                     IsActive = c.cellInfos.IsActive,
                                     ColNum=c.cellInfos.Col,
                                     RowNum=c.cellInfos.Layer,
-                                    Shelf = c.cellInfos.ShelfCode.Substring(8,2).Trim()
-                                    //UpdateDate=c.storage.UpdateTime==null?DateTime.Now:c.storage.UpdateTime
-                                }).ToArray();
+                                    Shelf =c.cellInfos.CellType == "5"?"01": c.cellInfos.ShelfCode.Substring(8,2).Trim()
+                                });
                 result.IsSuccess = true;
                 result.ShelfInfo = cellInfo.ToArray();
             }

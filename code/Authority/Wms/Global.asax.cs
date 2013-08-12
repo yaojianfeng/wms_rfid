@@ -270,7 +270,8 @@ namespace Wms
                 .WithIdentity("HelloJob", "HelloJobGroup")
                 .WithDescription("This is my first trigger")
                 //.WithCronSchedule("0/10 * * * * ?")//每10秒执行；
-                .WithCronSchedule("0 0 4 1/1 * ? *")//每天4点执行；
+                .WithCronSchedule("0 0 0/1 1/1 * ? *")//每小时执行；
+                //.WithCronSchedule("0 0 4 1/1 * ? *")//每天4点执行；
                 .StartNow()
                 .Build();
 

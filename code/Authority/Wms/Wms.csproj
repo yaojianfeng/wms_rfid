@@ -36,6 +36,15 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <ExcludeApp_Data>true</ExcludeApp_Data>
+    <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
+    <DeployIisAppPath>wms</DeployIisAppPath>
+    <PackageAsSingleFile>true</PackageAsSingleFile>
+    <PublishDatabases>true</PublishDatabases>
+    <PublishDatabaseSettings>
+      <Objects>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Logging">
@@ -150,6 +159,7 @@
     <Compile Include="Controllers\Authority\UserController.cs" />
     <Compile Include="Controllers\Authority\UserPermissionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\WCS\TaskRestController.cs" />
     <Compile Include="Controllers\WMS\AutomotiveSystems\StockCheckTaskController.cs" />
     <Compile Include="Controllers\WMS\AutomotiveSystems\StockInTaskController.cs" />
     <Compile Include="Controllers\WMS\AutomotiveSystems\StockMoveTaskController.cs" />
@@ -253,36 +263,17 @@
     <Content Include="App_Data\aspnetdb_log.ldf">
       <DependentUpon>ASPNETDB.MDF</DependentUpon>
     </Content>
-    <Content Include="bin\CKFinder.dll" />
     <Content Include="bin\EntityFramework.dll" />
-    <Content Include="bin\EntityFramework.xml" />
-    <Content Include="bin\LitJson.dll" />
     <Content Include="bin\log4net.dll" />
     <Content Include="bin\Microsoft.Practices.ServiceLocation.dll" />
     <Content Include="bin\Microsoft.Practices.Unity.Configuration.dll" />
     <Content Include="bin\Microsoft.Practices.Unity.dll" />
-    <Content Include="bin\Microsoft.Practices.Unity.Interception.Configuration.dll" />
-    <Content Include="bin\Microsoft.Practices.Unity.Interception.dll" />
     <Content Include="bin\THOK.Authority.Bll.dll" />
     <Content Include="bin\THOK.Authority.Bll.pdb" />
     <Content Include="bin\THOK.Authority.Dal.dll" />
     <Content Include="bin\THOK.Authority.Dal.pdb" />
     <Content Include="bin\THOK.Common.Highcharts.dll" />
     <Content Include="bin\THOK.Common.Highcharts.pdb" />
-    <Content Include="Controllers\WMS\ComplexSearch\bin\EntityFramework.dll" />
-    <Content Include="Controllers\WMS\ComplexSearch\bin\EntityFramework.xml" />
-    <Content Include="Controllers\WMS\ComplexSearch\bin\log4net.dll" />
-    <Content Include="Controllers\WMS\ComplexSearch\bin\Microsoft.Practices.ServiceLocation.dll" />
-    <Content Include="Controllers\WMS\ComplexSearch\bin\Microsoft.Practices.Unity.Configuration.dll" />
-    <Content Include="Controllers\WMS\ComplexSearch\bin\Microsoft.Practices.Unity.dll" />
-    <Content Include="Controllers\WMS\ComplexSearch\bin\NPOI.dll" />
-    <Content Include="Controllers\WMS\ComplexSearch\bin\SignalR.Hosting.AspNet.dll" />
-    <Content Include="Controllers\WMS\ComplexSearch\bin\SignalR.Hosting.Common.dll" />
-    <Content Include="Controllers\WMS\ComplexSearch\bin\Tek4.Highcharts.Exporting.dll" />
-    <Content Include="Controllers\WMS\ComplexSearch\bin\THOK.Authority.Bll.dll" />
-    <Content Include="Controllers\WMS\ComplexSearch\bin\THOK.Authority.Bll.pdb" />
-    <Content Include="Controllers\WMS\ComplexSearch\bin\THOK.Authority.Dal.dll" />
-    <Content Include="Controllers\WMS\ComplexSearch\bin\THOK.Authority.Dal.pdb" />
     <Content Include="Content\Images\banner.jpg" />
     <Content Include="Content\Images\login_bg.jpg" />
     <Content Include="Content\Images\login_bg02.jpg" />
@@ -564,9 +555,6 @@
     <Content Include="Content\Scripts\ckeditor\skins\v2\skin.js" />
     <Content Include="Content\Scripts\ckeditor\skins\v2\templates.css" />
     <Content Include="Content\Scripts\ckeditor\themes\default\theme.js" />
-    <Content Include="Content\Scripts\ckfinder\bin\Debug\CKFinder.dll" />
-    <Content Include="Content\Scripts\ckfinder\bin\Debug\CKFinder.pdb" />
-    <Content Include="Content\Scripts\ckfinder\bin\Release\CKFinder.dll" />
     <Content Include="Content\Scripts\ckfinder\ckfinder.html" />
     <Content Include="Content\Scripts\ckfinder\ckfinder.js" />
     <Content Include="Content\Scripts\ckfinder\config.ascx" />
@@ -582,10 +570,6 @@
     <Content Include="Content\Scripts\ckfinder\plugins\dummy\lang\en.js" />
     <Content Include="Content\Scripts\ckfinder\plugins\dummy\lang\pl.js" />
     <Content Include="Content\Scripts\ckfinder\plugins\dummy\plugin.js" />
-    <Content Include="Content\Scripts\ckfinder\plugins\fileeditor\bin\Debug\CKFinder_FileEditor.dll" />
-    <Content Include="Content\Scripts\ckfinder\plugins\fileeditor\bin\Debug\CKFinder_FileEditor.pdb" />
-    <Content Include="Content\Scripts\ckfinder\plugins\fileeditor\bin\Release\CKFinder_FileEditor.dll" />
-    <Content Include="Content\Scripts\ckfinder\plugins\fileeditor\bin\Release\CKFinder_FileEditor.pdb" />
     <Content Include="Content\Scripts\ckfinder\plugins\fileeditor\codemirror\contrib\csharp\css\csharpcolors.css" />
     <Content Include="Content\Scripts\ckfinder\plugins\fileeditor\codemirror\contrib\csharp\js\parsecsharp.js" />
     <Content Include="Content\Scripts\ckfinder\plugins\fileeditor\codemirror\contrib\csharp\js\tokenizecsharp.js" />
@@ -631,16 +615,8 @@
     <Content Include="Content\Scripts\ckfinder\plugins\gallery\colorbox\jquery.colorbox-min.js" />
     <Content Include="Content\Scripts\ckfinder\plugins\gallery\colorbox\jquery.min.js" />
     <Content Include="Content\Scripts\ckfinder\plugins\gallery\colorbox\license.txt" />
-    <Content Include="Content\Scripts\ckfinder\plugins\imageresize\bin\Debug\CKFinder_ImageResize.dll" />
-    <Content Include="Content\Scripts\ckfinder\plugins\imageresize\bin\Debug\CKFinder_ImageResize.pdb" />
-    <Content Include="Content\Scripts\ckfinder\plugins\imageresize\bin\Release\CKFinder_ImageResize.dll" />
-    <Content Include="Content\Scripts\ckfinder\plugins\imageresize\bin\Release\CKFinder_ImageResize.pdb" />
     <Content Include="Content\Scripts\ckfinder\plugins\imageresize\images\mini.gif" />
     <Content Include="Content\Scripts\ckfinder\plugins\imageresize\plugin.js" />
-    <Content Include="Content\Scripts\ckfinder\plugins\watermark\bin\Debug\CKFinder_Watermark.dll" />
-    <Content Include="Content\Scripts\ckfinder\plugins\watermark\bin\Debug\CKFinder_Watermark.pdb" />
-    <Content Include="Content\Scripts\ckfinder\plugins\watermark\bin\Release\CKFinder_Watermark.dll" />
-    <Content Include="Content\Scripts\ckfinder\plugins\watermark\bin\Release\CKFinder_Watermark.pdb" />
     <Content Include="Content\Scripts\ckfinder\plugins\watermark\logo.gif" />
     <Content Include="Content\Scripts\ckfinder\skins\kama\app.css" />
     <Content Include="Content\Scripts\ckfinder\skins\kama\host.css" />
@@ -805,7 +781,6 @@
     <Content Include="Content\Scripts\ckfinder\skins\v1\richcombo.css" />
     <Content Include="Content\Scripts\ckfinder\skins\v1\skin.js" />
     <Content Include="Content\Scripts\ckfinder\skins\v1\uipanel.css" />
-    <Content Include="Content\Scripts\ckfinder\userfiles\images\曾祥展.jpg" />
     <Content Include="Content\Scripts\ckfinder\userfiles\_thumbs\Images\marina-bay-sands-skypark-infinity-pool-singapore-57-storeys-high-5 %281%29.jpg" />
     <Content Include="Content\Scripts\highcharts\adapters\mootools-adapter.js" />
     <Content Include="Content\Scripts\highcharts\adapters\mootools-adapter.src.js" />
@@ -1644,7 +1619,6 @@
     <Content Include="Content\themes\base\images\son_StockPlace.png" />
     <Content Include="Content\themes\base\images\son_Warehouse.png" />
     <Content Include="Content\themes\base\images\tabs_close.gif" />
-    <Content Include="Controllers\WMS\ComplexSearch\bin\THOK.Common.dll" />
     <Content Include="DB.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -1708,7 +1682,7 @@
     <Folder Include="Content\App_Data\" />
     <Folder Include="Content\Scripts\ckfinder\userfiles\files\" />
     <Folder Include="Content\Scripts\ckfinder\userfiles\flash\" />
-    <Folder Include="Controllers\WCS\" />
+    <Folder Include="Content\Scripts\ckfinder\userfiles\images\" />
     <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
@@ -1739,6 +1713,18 @@
     <ProjectReference Include="..\THOK.Common\THOK.Common.csproj">
       <Project>{2F9C4207-F8A0-4E55-A2CB-3514ADC0A437}</Project>
       <Name>THOK.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\THOK.WCS.Bll\THOK.WCS.Bll.csproj">
+      <Project>{C7885513-E200-41BD-8409-359DE49C232D}</Project>
+      <Name>THOK.WCS.Bll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\THOK.WCS.Dal\THOK.WCS.Dal.csproj">
+      <Project>{03A98CF0-14B1-4FD7-BC27-1F19728C8674}</Project>
+      <Name>THOK.WCS.Dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\THOK.WCS.DbModel\THOK.WCS.DbModel.csproj">
+      <Project>{B8A298CE-D286-4381-9B61-6527B3677ACA}</Project>
+      <Name>THOK.WCS.DbModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\THOK.Wms.Allot\THOK.WMS.Allot.csproj">
       <Project>{330D59D0-3B57-4F12-BB7D-49AF46DCD46D}</Project>
@@ -1781,7 +1767,6 @@
     <None Include="Content\Scripts\ckfinder\skins\kama\images\toolbar\Thumbs.db" />
     <None Include="Content\Scripts\ckfinder\skins\v1\images\Thumbs.db" />
     <None Include="Content\Scripts\ckfinder\userfiles\.htaccess" />
-    <None Include="Content\Scripts\ckfinder\userfiles\images\Thumbs.db" />
     <None Include="Content\Scripts\ckfinder\userfiles\_thumbs\Images\Thumbs.db" />
     <None Include="Content\Scripts\jquery-easyui-1.2.6\themes\default\images\Thumbs.db" />
     <None Include="Content\Scripts\jquery-easyui-1.2.6\themes\gray\images\Thumbs.db" />
@@ -2225,7 +2210,6 @@
     <Content Include="Views\StockMoveBill\_UnitPartial.cshtml" />
     <Content Include="Views\Shared\_ScriptPartial.cshtml" />
     <Content Include="Views\StockInBill\_SearchPartial.cshtml" />
-    <Content Include="Views\StockInBill\Search.cshtml" />
     <Content Include="Views\StockInBill\SearchPage.cshtml" />
     <Content Include="Views\Warehouse2\Index.cshtml" />
     <Content Include="Views\Warehouse2\_SearchPartial.cshtml" />
@@ -2312,7 +2296,6 @@
     <Content Include="Views\ParameterSet\_EditPartial.cshtml" />
     <Content Include="Views\ParameterSet\_DeletePartial.cshtml" />
     <Content Include="Views\ParameterSet\_SystemNamePartial.cshtml" />
-    <Content Include="Views\Test1\Index.cshtml" />
     <Content Include="Views\Shared\_TaskPartial.cshtml" />
     <Content Include="Views\StockInBill\_TaskPartial.cshtml" />
     <Content Include="Views\StockMoveBill\_TaskPartial.cshtml" />
@@ -2412,6 +2395,7 @@
     <Content Include="Views\System\_PrintPartial.cshtml" />
     <Content Include="Views\Module\_PrintPartial.cshtml" />
     <Content Include="Views\ProductSize\_Product1Partial.cshtml" />
+    <Content Include="Views\ProfitLossBill\_UnitPartial.cshtml" />
     <Content Include="Views\Position\_SRMName1Partial.cshtml" />
     <Content Include="Views\Path\_OriginPartial1.cshtml" />
     <Content Include="Views\Path\_TargetPartial1.cshtml" />

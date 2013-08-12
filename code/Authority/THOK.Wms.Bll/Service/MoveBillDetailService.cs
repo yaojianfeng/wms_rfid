@@ -412,26 +412,33 @@ namespace THOK.Wms.Bll.Service
                 if(BillNos.Count()==1){
                     string billnoStr = BillNos[0].ToString();
                     var sortWork = SortWorkDispatchRepository.GetQueryable().FirstOrDefault(i => i.MoveBillNo == billnoStr);
-                    sortingName = sortWork.SortingLine.SortingLineName;
+                    if (sortWork != null)
+                    {
+                        sortingName = sortWork.SortingLine.SortingLineName;
+                    }
+                    else
+                    {
+                        sortingName = "正常";
+                    }
                 }
                 var moves = MoveBillDetailQuery.Where(i => BillNos.Any(b => b == i.BillNo));
                 if (isAbnormity == false)
                     moves = moves.Where(i => i.Product.IsAbnormity != "1");                
                 if (isGroup)
                 {
-                    var moveBillDetail = moves.Where(s => s.OutCell.Area.AreaType != "5" && s.Product.IsAbnormity == "1")
+                    var moveBillDetail = moves.Where(s => s.OutCell.Area.AreaType != "5" && s.Product.IsAbnormity == "1" && s.InCell.Area.AreaType=="5")
                                             .GroupBy(m => new { m.ProductCode, m.Product.ProductName, m.Product })
                                             .Select(r => new { r.Key.ProductCode, r.Key.ProductName, r.Key.Product, RealQuantity = r.Sum(p => p.RealQuantity) }).AsEnumerable()
                                             .Select(r => new { r.Product, isAbnormity = r.Product.IsAbnormity == "1" ? "*" : " ", r.ProductCode, r.ProductName, RealQuantity = r.RealQuantity / r.Product.Unit.Count, strRealQuantity = r.RealQuantity / r.Product.UnitList.Unit02.Count })
                                             .OrderBy(r => r.RealQuantity).ThenBy(s => s.Product.BelongRegion);
 
-                    var moveBillDetail1 = moves.Where(s => s.OutCell.Area.AreaType != "5" && s.Product.IsAbnormity != "1")
+                    var moveBillDetail1 = moves.Where(s => s.OutCell.Area.AreaType != "5" && s.Product.IsAbnormity != "1" && s.InCell.Area.AreaType == "5")
                                            .GroupBy(m => new { m.ProductCode, m.Product.ProductName, m.Product })
                                            .Select(r => new { r.Key.ProductCode, r.Key.ProductName, r.Key.Product, RealQuantity = r.Sum(p => p.RealQuantity) }).AsEnumerable()
                                            .Select(r => new { r.Product, isAbnormity = r.Product.IsAbnormity == "1" ? "*" : " ", r.ProductCode, r.ProductName, RealQuantity = r.RealQuantity / r.Product.Unit.Count, strRealQuantity = r.RealQuantity / r.Product.UnitList.Unit02.Count })
                                            .OrderBy(r => r.RealQuantity).ThenBy(s => s.Product.BelongRegion);
 
-                    var moveBillDetail2 = moves.Where(s => s.OutCell.Area.AreaType == "5").AsEnumerable()
+                    var moveBillDetail2 = moves.Where(s => s.OutCell.Area.AreaType == "5" && s.InCell.Area.AreaType == "5").AsEnumerable()
                                             .Select(r => new { OutCellName = r.OutCell.CellName, InCellName = r.InCell.CellName, r.Product, isAbnormity = r.Product.IsAbnormity == "1" ? "*" : " ", r.ProductCode, r.Product.ProductName, RealQuantity = r.RealQuantity / r.Product.Unit.Count, strRealQuantity = r.RealQuantity / r.Product.UnitList.Unit02.Count })
                                             .OrderBy(r => r.RealQuantity).ThenBy(s => s.Product.BelongRegion);
                    

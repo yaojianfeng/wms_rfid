@@ -19,48 +19,36 @@ namespace THOK.Authority.Bll.Service
             get { return this.GetType(); }
         }
 
-        public object GetSystemParameter(int page, int rows, SystemParameter systemParameter)
+        public object GetSystemParameter(int page, int rows, string parameterName, string parameterValue, string remark, string userName, string SystemID)
         {
-            var query = SystemParameterRepository.GetQueryable()
-                            .Where(a => a.ParameterName.Contains(systemParameter.ParameterName)
-                                || a.ParameterValue.Contains(systemParameter.ParameterValue)
-                                || a.Remark.Contains(systemParameter.Remark)
-                                || a.UserName.Contains(systemParameter.UserName)
-                                || a.SystemID == systemParameter.SystemID);
-            if (!systemParameter.ParameterName.Equals(string.Empty))
-            {
-                query.Where(a => a.ParameterName == systemParameter.ParameterName);
-            }
-            if (!systemParameter.ParameterValue.Equals(string.Empty))
-            {
-                query.Where(a => a.ParameterValue == systemParameter.ParameterValue);
-            }
-            if (!systemParameter.Remark.Equals(string.Empty))
-            {
-                query.Where(a => a.Remark == systemParameter.Remark);
-            }
-            if (!systemParameter.UserName.Equals(string.Empty))
-            {
-                query.Where(a => a.UserName == systemParameter.UserName);
-            }
-            if (systemParameter.SystemID != null)
-            {
-                query.Where(a => a.SystemID == systemParameter.SystemID);
-            }
-            query = query.OrderBy(a => a.Id);
-            int total = query.Count();
-            query = query.Skip((page - 1) * rows).Take(rows);
-            var info = query.ToArray().Select(a => new
-            {
-                Id = a.Id,
-                a.ParameterName,
-                a.ParameterValue,
-                a.Remark,
-                a.UserName,
-                a.SystemID,
-                SystemName = a.SystemID == null ? "" : a.System.SystemName
-            });
-            return new { total, rows = info.ToArray() };
+            IQueryable<SystemParameter> systemParameterQuery = SystemParameterRepository.GetQueryable();
+            IQueryable<THOK.Authority.DbModel.System> systemQuery = SystemRepository.GetQueryable();
+
+            var systemParameter = systemParameterQuery.Join(systemQuery,
+                                         s => s.SystemID,
+                                         s1 => s1.SystemID,
+                                         (s, s1) => new { s.Id, s.ParameterName, s.ParameterValue, s.Remark, s.UserName, SystemName = s1.SystemName })
+                                         .Join(systemQuery,
+                                         c => c.SystemName,
+                                         s2 => s2.SystemName,
+                                         (c, s2) => new { c.Id, c.ParameterName, c.ParameterValue, c.Remark, c.SystemName,c.UserName,SystemID=s2.SystemName })
+                                         .Where(p => p.ParameterName.Contains(parameterName) && p.ParameterValue.Contains(parameterValue) && p.Remark.Contains(remark))
+                                         .OrderBy(p => p.Id).AsEnumerable()
+                                         .Select(p => new
+                                         {
+                                             Id = p.Id,
+                                             p.ParameterName,
+                                             p.ParameterValue,
+                                             p.Remark,
+                                             p.UserName,
+                                             p.SystemID,
+                                             SystemName = p.SystemID == null ? "" : p.SystemName
+                                         });
+
+            int total = systemParameter.Count();
+            systemParameter = systemParameter.Skip((page - 1) * rows).Take(rows);
+            return new { total, rows = systemParameter.ToArray() };
+           
         }
 
         public bool SetSystemParameter(SystemParameter systemParameter, string userName, out string error)

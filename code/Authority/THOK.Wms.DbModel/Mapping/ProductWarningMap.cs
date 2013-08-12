@@ -24,13 +24,13 @@ namespace THOK.Wms.DbModel.Mapping
                .HasMaxLength(20);
 
             this.Property(t => t.MinLimited)
-                .HasPrecision(18, 2);
+                .HasPrecision(18,4);
 
             this.Property(t => t.MaxLimited)
-                .HasPrecision(18,2);
+                .HasPrecision(18,4);
 
             this.Property(t => t.AssemblyTime)
-                .HasPrecision(18,2);
+                .HasPrecision(18,4);
 
             this.Property(t => t.Memo)
                 .HasMaxLength(100);

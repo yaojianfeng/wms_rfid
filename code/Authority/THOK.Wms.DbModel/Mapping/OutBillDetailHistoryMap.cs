@@ -38,15 +38,15 @@ namespace THOK.Wms.DbModel.Mapping
 
             this.Property(t => t.BillQuantity)
                 .IsRequired()
-                .HasPrecision(18, 2);
+                .HasPrecision(18,4);
 
             this.Property(t => t.AllotQuantity)
                 .IsRequired()
-                .HasPrecision(18, 2);
+                .HasPrecision(18,4);
 
             this.Property(t => t.RealQuantity)
                 .IsRequired()
-                .HasPrecision(18, 2);
+                .HasPrecision(18,4);
 
             this.Property(t => t.Description)
                 .HasMaxLength(100);

@@ -13,6 +13,8 @@ namespace THOK.Wms.Bll.Service
     {
         [Dependency]
         public IUnitListRepository UnitListRepository { get; set; }
+        [Dependency]
+        public IUnitRepository UnitRepository { get; set; }
 
         protected override Type LogPrefix
         {
@@ -92,8 +94,15 @@ namespace THOK.Wms.Bll.Service
             return true;
         }
 
-        public bool Save(UnitList unitlist)
+        public bool Save(UnitList unitlist, out string strResult)
         {
+            strResult = string.Empty;
+            bool result = false;
+            IQueryable<Unit> unit = UnitRepository.GetQueryable();
+            var u1 = UnitRepository.GetQueryable().FirstOrDefault(un=>un.UnitCode==unitlist.UnitCode01);
+            var u2 = UnitRepository.GetQueryable().FirstOrDefault(un => un.UnitCode == unitlist.UnitCode01);
+            var u3 = UnitRepository.GetQueryable().FirstOrDefault(un => un.UnitCode == unitlist.UnitCode01);
+            var u4 = UnitRepository.GetQueryable().FirstOrDefault(un => un.UnitCode == unitlist.UnitCode01);
             var ul = UnitListRepository.GetQueryable().FirstOrDefault(u => u.UnitListCode == unitlist.UnitListCode);
             ul.UnitListCode = unitlist.UnitListCode;
             ul.UniformCode = unitlist.UniformCode;

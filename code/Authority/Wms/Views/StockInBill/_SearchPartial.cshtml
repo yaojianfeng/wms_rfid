@@ -6,6 +6,17 @@
     var editKey = false;
     var deleteKey = false;
     function searchClick() {
+        $('#dlg-search').dialog('open').dialog('setTitle', '入库单查询');
+        $("input[type=text]").attr("value", "");
+        $('#beginDate').datebox({ editable: false });
+        $('#endDate').datebox({ editable: false });
+        $('#operate_Status').combo({ editable: false });
+        $('#beginDate').datebox('setValue', "");
+        $('#endDate').datebox('setValue', "");
+        $('#warehouse_In').combogrid('clear');
+        $('#operatePerson').combogrid('clear');
+        $('#checkPerson').combogrid('clear');
+        $('#operate_Status').combo('setValue', "");
         if (searchDialog == null) {
             searchDialog = $('<div></div>').dialog({
                 title: '查询',
@@ -113,18 +124,6 @@
 					{ field: 'EmployeeName', title: '员工名称', align: 'left', width: 30 }
 				]]
         });
-
-        $('#dlg-search').dialog('open').dialog('setTitle', '入库单查询');
-        $("input[type=text]").attr("value", "");
-        $('#beginDate').datebox({ editable: false });
-        $('#endDate').datebox({ editable: false });
-        $('#operate_Status').combo({ editable: false });
-        $('#beginDate').datebox('setValue', "");
-        $('#endDate').datebox('setValue', "");
-        $('#warehouse_In').combogrid('clear');
-        $('#operatePerson').combogrid('clear');
-        $('#checkPerson').combogrid('clear');
-        $('#operate_Status').combo('setValue', "");
     }
 </script>
 <script src="../../Scripts/mykeyboardshortcuts.js" type="text/javascript"></script>

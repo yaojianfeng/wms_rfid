@@ -113,6 +113,8 @@ namespace THOK.Wms.Repository
 
             modelBuilder.Configurations.Add(new DailyBalanceHistoryMap());
 
+            modelBuilder.Configurations.Add(new XmlValueMap());
+
             #endregion
 
             #region wcs

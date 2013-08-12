@@ -7,8 +7,7 @@
         for (var i = 0; i < row.length; i++) {
             rowBill += row[i].BillNo + ",";
         }
-        alert(rowBill);
-
+       
         if (row) {
             var isGroup = true;
             window.location.href = '/StockMoveBill/CreateExcelToClient/?billNo=' + rowBill + '&isGroup=' + isGroup;
