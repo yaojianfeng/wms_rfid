@@ -415,6 +415,7 @@ namespace THOK.Wms.Bll.Service
                                                 UnitCode = o.UnitCode,
                                                 AllotQuantity = allotQuantity,
                                                 RealQuantity = allotQuantity,
+                                                FinishTime = DateTime.Now,
                                                 Status = "2"
                                             };
                                             lock (sortWork.OutBillMaster.OutBillAllots)
