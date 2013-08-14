@@ -4,10 +4,14 @@
 		<ConnectionString Value = "server=.;database =wms_rfid_db;UID =sa" />
 		<Password Name = "PWD" Value = "65CED0851FFD283F"/>
 	</Connection>
-	<Connection Name = "YXConnection" DatabaseType="DB2">
+	<Connection Name = "YXConnection1111" DatabaseType="DB2">
 		<ConnectionString Value="server=10.80.1.239:50000;database =gxv3td;UID=qzcc" />
 		<Password Name="PWD" Value="59E4F4EFD5B49ED3"/>
 	</Connection>
+  <Connection Name = "YXConnection" DatabaseType="DB2">
+    <ConnectionString Value="server=10.80.1.239:50000;database =gxv3td;UID=lbcc" />
+    <Password Name="PWD" Value="80649E9ACB75ABF3"/>
+  </Connection>
 	<Connection Name = "ZYJCConnection" DatabaseType = "SQLSERVER">
 		<ConnectionString Value = "server=10.82.211.205;database =CORP_SCAN;UID =sa" />
 		<Password Name = "PWD" Value = "F343AB1C018D8B2C"/>
