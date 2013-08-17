@@ -8,6 +8,7 @@ using Microsoft.Practices.Unity;
 using THOK.Wms.Dal.Interfaces;
 using THOK.Wms.SignalR;
 using THOK.Wms.SignalR.Common;
+using THOK.Authority.Dal.Interfaces;
 
 namespace THOK.Wms.Bll.Service
 {
@@ -31,6 +32,9 @@ namespace THOK.Wms.Bll.Service
         public IStorageLocker Locker { get; set; }
         [Dependency]
         public IProductRepository ProductRepository { get; set; }
+
+        [Dependency]
+        public ISystemParameterRepository SystemParameterRepository { get; set; }
 
         protected override Type LogPrefix
         {
@@ -403,9 +407,11 @@ namespace THOK.Wms.Bll.Service
         public System.Data.DataTable GetMoveBillDetail(int page, int rows, string BillNo, bool isAbnormity, bool isGroup,out string sortingName)
         {
             System.Data.DataTable dt = new System.Data.DataTable();
+            IQueryable<THOK.Authority.DbModel.SystemParameter> systemParQuery = SystemParameterRepository.GetQueryable();
             BillNo = BillNo.Substring(0, BillNo.Length - 1);
             string[] BillNos = BillNo.Split(',');
             sortingName = "合单";
+            isGroup = true;
             if (BillNos.Count()>0)
             {
                 IQueryable<MoveBillDetail> MoveBillDetailQuery = MoveBillDetailRepository.GetQueryable();
@@ -418,8 +424,13 @@ namespace THOK.Wms.Bll.Service
                     }
                     else
                     {
-                        sortingName = "正常";
+                        sortingName = "";
                     }
+                }
+                var IsSummary = systemParQuery.FirstOrDefault(s => s.ParameterName == "IsSummary");//打印是否合单汇总0：不汇总；1：汇总
+                if (IsSummary != null && IsSummary.ParameterValue=="0")
+                {
+                    isGroup = false;
                 }
                 var moves = MoveBillDetailQuery.Where(i => BillNos.Any(b => b == i.BillNo));
                 if (isAbnormity == false)

@@ -1,0 +1,8 @@
+1	InMantissaIsPiece	0	入库尾数是否放入件烟区	admin	ed0e6ef0-9deb-4cde-8dcf-702d5b666aa8
+2	IsDefaultProduct	0	预设卷烟其他烟是否可以放入	admin	ed0e6ef0-9deb-4cde-8dcf-702d5b666aa8
+3	IsUselowerlimit	1	是否使用下限  0：否 1：是	admin	ed0e6ef0-9deb-4cde-8dcf-702d5b666aa8
+4	DownInterFace	1	1：浪潮 2：创联	admin	ed0e6ef0-9deb-4cde-8dcf-702d5b666aa8
+5	isRoundingTray	0	立式机总数取整。0：不取整，其它表示总数	admin	ed0e6ef0-9deb-4cde-8dcf-702d5b666aa8
+6	SortingNumber	6	分拣剩余的值。提醒仓库实时出库	admin	ed0e6ef0-9deb-4cde-8dcf-702d5b666aa8
+7	IsSummary	0	移库打印汇总 0：不汇总；1：汇总	admin	ed0e6ef0-9deb-4cde-8dcf-702d5b666aa8
+NULL	NULL	NULL	NULL	NULL	NULL
